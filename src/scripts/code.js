@@ -70,11 +70,14 @@ function loadProgress(event) {
   const file = event.target.files[0];
   if (file) {
     const reader = new FileReader();
+    // 読み込み開始のフィードバック
+    document.getElementById('status').textContent = '読み込み中...';
     reader.onload = function(e) {
       try {
         const data = JSON.parse(e.target.result);
-        
-        // Biomesの更新
+        // 読み込み成功のフィードバック
+        document.getElementById('status').textContent = '読み込み完了 ✓';
+        // 既存の処理
         allBiomes = data.biomes.map(biome => ({
           no: biome.no,
           name_en: biome.name_en,
@@ -87,9 +90,19 @@ function loadProgress(event) {
 
         displayBiomes(allBiomes);
         calculateProgress(allBiomes);
+
+        // フィードバックを一定時間後に消去（オプション）
+        setTimeout(() => {
+          document.getElementById('status').textContent = '';
+        }, 3000); // 3秒後にメッセージを消去
       } catch(error) {
         console.error('Error parsing JSON:', error);
+        document.getElementById('status').textContent = '読み込みエラー';
         alert('Failed to load the data. Please check the file format.');
+        // 一定時間後にエラーメッセージを消去（オプション）
+        setTimeout(() => {
+          document.getElementById('status').textContent = '';
+        }, 3000);
       }
     };
     reader.readAsText(file);

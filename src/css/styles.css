@@ -129,8 +129,16 @@ body {
 }
 .color-and-size {
     display: flex;
+    flex-wrap: wrap; /* 要素が自動的に改行する */
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* 要素間の間隔 */
+}
+.color-and-size select, 
+.color-and-size input[type="text"],
+.color-and-size input[type="number"],
+.color-and-size input[type="color"] {
+  flex-grow: 1; /* 必要に応じてスペースを占有 */
+  min-width: 100px; /* 最小幅を設定。必要に応じて調整 */
 }
 .color-and-size span {
     white-space: nowrap;
