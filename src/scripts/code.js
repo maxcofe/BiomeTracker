@@ -167,9 +167,21 @@ function updateFileNameDisplay() {
 function updateWorldFilter(event) {
   const world = event.target.value;
   worldFilters[world] = event.target.checked;
-  const filteredBiomes = allBiomes.filter(biome => worldFilters[biome.world_type]);
+  
+  applyFilters(); // 共通のフィルタ関数を呼び出す
+}
+
+function applyFilters() {
+  const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
+  
+  const filteredBiomes = allBiomes.filter(biome => 
+    (biome.name_en.toLowerCase().includes(searchValue) || 
+     biome.name_jp.toLowerCase().includes(searchValue)) &&
+    worldFilters[biome.world_type]
+  );
+  
   displayBiomes(filteredBiomes);
-  calculateProgress(filteredBiomes, true); // ワールドフィルタ時はtrue
+  calculateProgress(filteredBiomes, true); // true はワールドフィルタの適用を示す
 }
 
 function toggleTopBar() {
@@ -240,18 +252,7 @@ function updateProgress() {
     return a.no - b.no;
   });
 
-  // 検索フィルタを保持するために現在の検索条件を取得
-  const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
-  
-  // フィルタリングを再適用
-  const filteredBiomes = allBiomes.filter(biome => 
-    (biome.name_en.toLowerCase().includes(searchValue) || 
-     biome.name_jp.toLowerCase().includes(searchValue)) &&
-    worldFilters[biome.world_type]
-  );
-  
-  displayBiomes(filteredBiomes);
-  calculateProgress(filteredBiomes, false); // 検索フィルタ時はfalse
+  applyFilters(); // 共通のフィルタ関数を呼び出す
   updateProgressDisplay();
 }
 
@@ -262,14 +263,7 @@ function updateProgressDisplay() {
 }
 
 function filterBiomes() {
-  const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
-  const filteredBiomes = allBiomes.filter(biome => 
-    (biome.name_en.toLowerCase().includes(searchValue) || 
-    biome.name_jp.toLowerCase().includes(searchValue)) &&
-    worldFilters[biome.world_type]
-  );
-  displayBiomes(filteredBiomes);
-  calculateProgress(filteredBiomes, false); // 検索フィルタ時はfalse
+  applyFilters(); // 共通のフィルタ関数を呼び出す
 }
 
 function rgbToHex(rgb) {
