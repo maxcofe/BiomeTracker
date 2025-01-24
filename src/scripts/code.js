@@ -9,8 +9,40 @@ let isTopBarVisible = true;
 let taskListBgColor = '#FFFFFF';
 let fontColor = '#000000';
 
+function applyStylesAndUpdateForm(data) {
+  const { backgroundColor, fontSize, fontColor, taskListBgColor, font, customFont } = data.styleSettings;
+
+  // スタイルの適用
+  document.body.style.backgroundColor = backgroundColor;
+  document.body.style.fontSize = `${fontSize}px`;
+  document.getElementById('biomeList').style.color = fontColor;
+  document.getElementById('biomeList').style.backgroundColor = taskListBgColor;
+  document.querySelectorAll('.boxed-section').forEach(el => {
+    el.style.backgroundColor = taskListBgColor;
+  });
+
+  // スタイル設定フォームに値をセット
+  document.getElementById('colorPicker').value = backgroundColor;
+  document.getElementById('fontSizeInput').value = fontSize;
+  document.getElementById('fontColorPicker').value = fontColor;
+  document.getElementById('taskListColorPicker').value = taskListBgColor;
+
+  // フォントの設定
+  document.getElementById('fontSelector').value = font;
+  document.getElementById('customFont').value = customFont;
+
+  // カスタムフォントが設定されている場合、デフォルトのフォントセレクトを無効化
+  if (customFont && customFont.trim() !== '') {
+    document.getElementById('fontSelector').disabled = true;
+    applyFont(`"${customFont}", Arial, sans-serif`);
+  } else {
+    document.getElementById('fontSelector').disabled = false;
+    applyFont(font);
+  }
+}
+
 function loadDefaultData() {
-  fetch('src/scripts/data/biome_tracker_default.json') // ファイル名は適宜変更
+  fetch('src/scripts/data/biome_tracker_default.json')
     .then(response => response.json())
     .then(data => {
       allBiomes = data.biomes.map(biome => ({
@@ -21,69 +53,17 @@ function loadDefaultData() {
         exp: biome.exp
       }));
 
-      // スタイルの適用
-      const { backgroundColor, fontSize, fontColor, taskListBgColor } = data.styleSettings;
-      document.body.style.backgroundColor = backgroundColor;
-      document.body.style.fontSize = `${fontSize}px`;
-      document.getElementById('biomeList').style.color = fontColor;
-      document.getElementById('biomeList').style.backgroundColor = taskListBgColor;
-      document.querySelectorAll('.boxed-section').forEach(el => {
-        el.style.backgroundColor = taskListBgColor;
-      });
-
-      // スタイル設定フォームに値をセット
-      document.getElementById('colorPicker').value = backgroundColor;
-      document.getElementById('fontSizeInput').value = fontSize;
-      document.getElementById('fontColorPicker').value = fontColor;
-      document.getElementById('taskListColorPicker').value = taskListBgColor;
+      applyStylesAndUpdateForm(data);
 
       displayBiomes(allBiomes);
       calculateProgress(allBiomes);
     })
     .catch(error => {
       console.error('Error loading default JSON:', error);
-      // エラーが発生した場合のデフォルトの動作（例えば、空のリストを表示するなど）
       allBiomes = [];
       displayBiomes(allBiomes);
       calculateProgress(allBiomes);
     });
-}
-
-function initialize() {
-  const fileInput = document.getElementById('csvFile');
-  const searchInput = document.getElementById('biomeSearch');
-  const fontSelector = document.getElementById('fontSelector');
-  const customFontInput = document.getElementById('customFont');
-  const toggleButton = document.getElementById('toggleTopBar');
-  const colorPicker = document.getElementById('colorPicker');
-  const fontSizeInput = document.getElementById('fontSizeInput');
-  const taskListColorPicker = document.getElementById('taskListColorPicker');
-  const fontColorPicker = document.getElementById('fontColorPicker');
-
-  document.querySelector('.file-upload-btn').addEventListener('click', function() {
-    fileInput.click();
-  });
-
-  fileInput.addEventListener('change', loadProgress);
-  searchInput.addEventListener('input', filterBiomes);
-  fontSelector.addEventListener('change', updateFont);
-  customFontInput.addEventListener('input', updateCustomFont);
-  toggleButton.addEventListener('click', toggleTopBar);
-  colorPicker.addEventListener('input', updateBackgroundColor);
-  fontSizeInput.addEventListener('input', updateFontSize);
-  taskListColorPicker.addEventListener('input', updateTaskListBackgroundColor);
-  fontColorPicker.addEventListener('input', updateFontColor);
-
-  // ワールドフィルターのチェックボックスを初期化
-  document.querySelectorAll('.worldFilter input').forEach(input => {
-    input.checked = true;
-    input.addEventListener('change', updateWorldFilter);
-  });
-
-  // トグルの初期化
-  toggleTopBar();
-  // 初期CSVの読み込み
-  loadDefaultData();
 }
 
 function loadProgress(event) {
@@ -103,34 +83,7 @@ function loadProgress(event) {
           exp: biome.exp
         }));
 
-        // スタイルの適用
-        const { backgroundColor, fontSize, fontColor, taskListBgColor, font, customFont } = data.styleSettings;
-        document.body.style.backgroundColor = backgroundColor;
-        document.body.style.fontSize = `${fontSize}px`;
-        document.getElementById('biomeList').style.color = fontColor;
-        document.getElementById('biomeList').style.backgroundColor = taskListBgColor;
-        document.querySelectorAll('.boxed-section').forEach(el => {
-          el.style.backgroundColor = taskListBgColor;
-        });
-
-        // スタイル設定フォームに値をセット
-        document.getElementById('colorPicker').value = backgroundColor;
-        document.getElementById('fontSizeInput').value = fontSize;
-        document.getElementById('fontColorPicker').value = fontColor;
-        document.getElementById('taskListColorPicker').value = taskListBgColor;
-
-        // フォントの設定
-        document.getElementById('fontSelector').value = font; // 選択されたフォントを設定
-        document.getElementById('customFont').value = customFont; // カスタムフォントを設定
-
-        // カスタムフォントが設定されている場合、デフォルトのフォントセレクトを無効化
-        if (customFont && customFont.trim() !== '') {
-          document.getElementById('fontSelector').disabled = true;
-          applyFont(`"${customFont}", Arial, sans-serif`);
-        } else {
-          document.getElementById('fontSelector').disabled = false;
-          applyFont(font);
-        }
+        applyStylesAndUpdateForm(data);
 
         displayBiomes(allBiomes);
         calculateProgress(allBiomes);
@@ -141,6 +94,54 @@ function loadProgress(event) {
     };
     reader.readAsText(file);
   }
+}
+
+function initialize() {
+  const elements = {
+    fileInput: document.getElementById('csvFile'),
+    searchInput: document.getElementById('biomeSearch'),
+    fontSelector: document.getElementById('fontSelector'),
+    customFontInput: document.getElementById('customFont'),
+    toggleButton: document.getElementById('toggleTopBar'),
+    colorPicker: document.getElementById('colorPicker'),
+    fontSizeInput: document.getElementById('fontSizeInput'),
+    taskListColorPicker: document.getElementById('taskListColorPicker'),
+    fontColorPicker: document.getElementById('fontColorPicker')
+  };
+
+  const eventListeners = [
+    { element: elements.fileInput, event: 'change', handler: loadProgress },
+    { element: elements.searchInput, event: 'input', handler: filterBiomes },
+    { element: elements.fontSelector, event: 'change', handler: updateFont },
+    { element: elements.customFontInput, event: 'input', handler: updateCustomFont },
+    { element: elements.toggleButton, event: 'click', handler: toggleTopBar },
+    { element: elements.colorPicker, event: 'input', handler: updateBackgroundColor },
+    { element: elements.fontSizeInput, event: 'input', handler: updateFontSize },
+    { element: elements.taskListColorPicker, event: 'input', handler: updateTaskListBackgroundColor },
+    { element: elements.fontColorPicker, event: 'input', handler: updateFontColor }
+  ];
+
+  eventListeners.forEach(({ element, event, handler }) => {
+    if (element) {
+      element.addEventListener(event, handler);
+    }
+  });
+
+  document.querySelector('.file-upload-btn').addEventListener('click', function() {
+    elements.fileInput.click();
+  });
+
+  // ワールドフィルターのチェックボックスを初期化
+  document.querySelectorAll('.worldFilter input').forEach(input => {
+    input.checked = true;
+    input.addEventListener('change', updateWorldFilter);
+  });
+
+  // トグルの初期化
+  toggleTopBar();
+  
+  // 初期データの読み込み
+  loadDefaultData();
 }
 
 function updateFileNameDisplay() {
@@ -274,37 +275,24 @@ function saveProgress() {
 
 function updateFont() {
   const selectedFont = document.getElementById('fontSelector').value;
-  applyFont(selectedFont);
+  applyFontAndColor(selectedFont);
 }
 
 function updateCustomFont() {
   const customFont = document.getElementById('customFont').value;
   const fontSelector = document.getElementById('fontSelector');
   
-  // カスタムフォントが入力されているかチェック
   if (customFont.trim() !== '') {
-    fontSelector.disabled = true; // プルダウンを非活性化
-    applyFont(`"${customFont}", Arial, sans-serif`);
+    fontSelector.disabled = true;
+    applyFontAndColor(`"${customFont}", Arial, sans-serif`);
   } else {
-    fontSelector.disabled = false; // プルダウンを再度活性化
-    updateFont(); // デフォルトのフォントを再適用
+    fontSelector.disabled = false;
+    updateFont();
   }
 }
 
 function applyFont(font) {
-  const elements = [
-    document.getElementById('progress'),
-    document.getElementById('biomeList'),
-    ...document.querySelectorAll('#biomeList li .biomeName'), // バイオーム名のテキスト
-    ...document.querySelectorAll('#biomeList li .world'), // ワールドのテキスト
-    ...document.querySelectorAll('.worldFilter label') // ワールドフィルタのラベル
-  ];
-
-  elements.forEach(el => {
-    if (el) {
-      el.style.fontFamily = font;
-    }
-  });
+  applyFontAndColor(font);
 }
 
 function updateBackgroundColor(event) {
@@ -327,19 +315,30 @@ function updateTaskListBackgroundColor(event) {
 
 function updateFontColor(event) {
   fontColor = event.target.value;
-  const elements = [
-    document.getElementById('biomeList'),
-    document.getElementById('progress'),
-    ...document.querySelectorAll('#biomeList li .biomeName'), // バイオーム名のテキスト
-    ...document.querySelectorAll('#biomeList li .world'), // ワールドのテキスト
-    ...document.querySelectorAll('.worldFilter label') // ワールドフィルタのラベル
-  ];
+  applyFontAndColor(null, fontColor); // フォント自体は変更せず、カラーだけ変更
+}
 
+function updateStyle(elements, property, value) {
   elements.forEach(el => {
     if (el) {
-      el.style.color = fontColor;
+      el.style[property] = value;
     }
   });
+}
+
+function applyFontAndColor(font, color) {
+  const elements = [
+    document.getElementById('progress'),
+    document.getElementById('biomeList'),
+    ...document.querySelectorAll('#biomeList li .biomeName'),
+    ...document.querySelectorAll('#biomeList li .world'),
+    ...document.querySelectorAll('.worldFilter label')
+  ];
+
+  updateStyle(elements, 'fontFamily', font);
+  if (color) {
+    updateStyle(elements, 'color', color);
+  }
 }
 
 window.onload = initialize;
