@@ -335,7 +335,12 @@ function updateTaskListBackgroundColor(event) {
 
 function updateFontColor(event) {
   fontColor = event.target.value;
-  applyFontAndColor(null, fontColor); // フォント自体は変更せず、カラーだけ変更
+  const customFont = document.getElementById('customFont').value;
+  if (customFont && customFont.trim() !== '') {
+    applyFontAndColor(`"${customFont}", Arial, sans-serif`, fontColor);
+  } else {
+    applyFontAndColor(document.getElementById('fontSelector').value, fontColor);
+  }
 }
 
 function updateStyle(elements, property, value) {
