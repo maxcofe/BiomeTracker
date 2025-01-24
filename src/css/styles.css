@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #00FF00;
+}
+.top-bar {
+    position: fixed;
+    top: 0;
+    background: #f9f9f9;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.search-bar {
+    flex-grow: 1;
+}
+.worldFilter {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+#biomeList {
+    margin-top: 20px;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #fff;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+#biomeList li {
+    list-style: none;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+#biomeList li input[type="checkbox"] {
+    margin-right: 10px;
+}
+#biomeList li .biomeName {
+    flex-grow: 1;
+}
+#biomeList li .world {
+    margin-left: 20px;
+    white-space: nowrap;
+}
+.progress {
+    margin-top: 10px;
+    font-weight: bold;
+}
+#biomeList::-webkit-scrollbar {
+    width: 10px;
+}
+#biomeList::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+#biomeList::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+#fontSelector {
+    margin-left: 10px;
+}
+#customFont {
+    margin-left: 10px;
+}
+.file-upload-wrapper button, .save-button {
+    background-color: #FF4500;
+}
+.file-upload-btn, .save-button {
+    background-color: #FF4500;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.toggle-top-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+    padding: 5px;
+    background-color: #6b5e9b;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#progress {
+    position: sticky;
+    top: auto; 
+    bottom: 10px; 
+    z-index: 3;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 80vw; 
+    margin-left: auto;
+    margin-right: auto;
+}
+.boxed-section {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #fff;
+    margin-bottom: 10px;
+}
+.search-bar-boxed {
+    width: 100%;
+    box-sizing: border-box;
+}
+.color-and-size {
+    display: flex;
+    flex-wrap: wrap; /* 要素が自動的に改行する */
+    align-items: center;
+    gap: 10px; /* 要素間の間隔 */
+}
+.color-and-size select {
+  width: 130px;
+}
+.color-and-size input[type="number"] {
+  width: 50px;
+}
+.color-and-size input[type="color"] {
+  width: 70px;
+}
+.color-and-size input[type="text"] {
+    width: 180px;
+}
+
+.color-and-size span {
+    white-space: nowrap;
+}
+.serch-section {
+    width: 80vw; 
+    margin-left: auto;
+    margin-right: auto;
+}
+.status {
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    margin-top: 5px;
+  }
