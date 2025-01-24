@@ -9,7 +9,7 @@ let taskListBgColor = '#FFFFFF';
 let fontColor = '#000000';
 
 function loadDefaultCSV() {
-  fetch('data/biome_list.csv')
+  fetch('src/scripts/data/biome_list.csv')
     .then(response => response.text())
     .then(csv => {
       allBiomes = processCSV(csv);
