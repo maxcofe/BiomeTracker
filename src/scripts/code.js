@@ -1,3 +1,4 @@
+// グローバル変数
 let totalBiomes = 0;
 let exploredBiomes = 0;
 let allBiomes = [];
@@ -8,16 +9,37 @@ let isTopBarVisible = true;
 let taskListBgColor = '#FFFFFF';
 let fontColor = '#000000';
 
-function loadDefaultCSV() {
-  fetch('src/scripts/data/biome_list.csv')
-    .then(response => response.text())
-    .then(csv => {
-      allBiomes = processCSV(csv);
+function loadDefaultData() {
+  fetch('data/biome_tracker_default.json') // ファイル名は適宜変更
+    .then(response => response.json())
+    .then(data => {
+      allBiomes = data.biomes.map(biome => ({
+        no: biome.no,
+        name_en: biome.name_en,
+        name_jp: biome.name_jp,
+        world_type: biome.world_type,
+        exp: biome.exp
+      }));
+
+      // スタイルの適用
+      const { backgroundColor, fontSize, fontColor, taskListBgColor } = data.styleSettings;
+      document.body.style.backgroundColor = backgroundColor;
+      document.body.style.fontSize = `${fontSize}px`;
+      document.getElementById('biomeList').style.color = fontColor;
+      document.getElementById('biomeList').style.backgroundColor = taskListBgColor;
+      document.querySelectorAll('.boxed-section').forEach(el => {
+        el.style.backgroundColor = taskListBgColor;
+      });
+
       displayBiomes(allBiomes);
       calculateProgress(allBiomes);
     })
     .catch(error => {
-      console.error('Error loading default CSV:', error);
+      console.error('Error loading default JSON:', error);
+      // エラーが発生した場合のデフォルトの動作（例えば、空のリストを表示するなど）
+      allBiomes = [];
+      displayBiomes(allBiomes);
+      calculateProgress(allBiomes);
     });
 }
 
@@ -36,7 +58,7 @@ function initialize() {
     fileInput.click();
   });
 
-  fileInput.addEventListener('change', handleFileSelect);
+  fileInput.addEventListener('change', loadProgress);
   searchInput.addEventListener('input', filterBiomes);
   fontSelector.addEventListener('change', updateFont);
   customFontInput.addEventListener('input', updateCustomFont);
@@ -55,22 +77,45 @@ function initialize() {
   // トグルの初期化
   toggleTopBar();
   // 初期CSVの読み込み
-  loadDefaultCSV();
+  loadDefaultData();
 }
 
-function handleFileSelect(event) {
-  const fileInput = event.target;
-  if (fileInput.files.length > 0) {
-    currentFileName = fileInput.files[0].name;
-    updateFileNameDisplay();
+function loadProgress(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        
+        // Biomesの更新
+        allBiomes = data.biomes.map(biome => ({
+          no: biome.no,
+          name_en: biome.name_en,
+          name_jp: biome.name_jp,
+          world_type: biome.world_type,
+          exp: biome.exp
+        }));
+
+        // スタイルの適用
+        const { backgroundColor, fontSize, fontColor, taskListBgColor } = data.styleSettings;
+        document.body.style.backgroundColor = backgroundColor;
+        document.body.style.fontSize = `${fontSize}px`;
+        document.getElementById('biomeList').style.color = fontColor;
+        document.getElementById('biomeList').style.backgroundColor = taskListBgColor;
+        document.querySelectorAll('.boxed-section').forEach(el => {
+          el.style.backgroundColor = taskListBgColor;
+        });
+
+        displayBiomes(allBiomes);
+        calculateProgress(allBiomes);
+      } catch(error) {
+        console.error('Error parsing JSON:', error);
+        alert('Failed to load the data. Please check the file format.');
+      }
+    };
+    reader.readAsText(file);
   }
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    allBiomes = processCSV(event.target.result);
-    displayBiomes(allBiomes);
-    calculateProgress(allBiomes);
-  };
-  reader.readAsText(fileInput.files[0]);
 }
 
 function updateFileNameDisplay() {
@@ -81,7 +126,7 @@ function updateFileNameDisplay() {
 function updateWorldFilter(event) {
   const world = event.target.value;
   worldFilters[world] = event.target.checked;
-  const filteredBiomes = allBiomes.filter(biome => worldFilters[biome.ワールド]);
+  const filteredBiomes = allBiomes.filter(biome => worldFilters[biome.world_type]);
   displayBiomes(filteredBiomes);
   calculateProgress(filteredBiomes, true); // ワールドフィルタ時はtrue
 }
@@ -99,23 +144,6 @@ function toggleTopBar() {
   }
 }
 
-function processCSV(fileContent) {
-  const rows = fileContent.split('\n').filter(row => row.trim() !== '');
-  const header = rows.shift(); // ヘッダを削除
-  const biomes = rows.map(row => {
-    const values = row.split(',');
-    return {
-      No: values[0],
-      英名: values[1],
-      日本語名: values[2],
-      ワールド: values[3],
-      EXP: values[4]
-    };
-  });
-  biomes.sort((a, b) => a.No - b.No); // Noでソート
-  return biomes;
-}
-
 function displayBiomes(data) {
   const biomeList = document.getElementById('biomeList');
   biomeList.innerHTML = '';
@@ -123,22 +151,22 @@ function displayBiomes(data) {
     const li = document.createElement('li');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.checked = biome.EXP === '〇';
-    checkbox.id = `biome-${biome.No}`;
+    checkbox.checked = biome.exp === '〇';
+    checkbox.id = `biome-${biome.no}`;
     checkbox.addEventListener('change', function() {
-      biome.EXP = this.checked ? '〇' : '×';
+      biome.exp = this.checked ? '〇' : '×';
       updateProgress();
     });
     li.appendChild(checkbox);
     
     const biomeName = document.createElement('span');
     biomeName.className = 'biomeName';
-    biomeName.textContent = `${biome.英名} / ${biome.日本語名}`;
+    biomeName.textContent = `${biome.name_en} / ${biome.name_jp}`;
     li.appendChild(biomeName);
     
     const world = document.createElement('span');
     world.className = 'world';
-    world.textContent = `(${biome.ワールド})`;
+    world.textContent = `(${biome.world_type})`;
     li.appendChild(world);
     
     biomeList.appendChild(li);
@@ -148,29 +176,29 @@ function displayBiomes(data) {
 function calculateProgress(data, isWorldFilter = true) {
   if (isWorldFilter) {
     totalBiomes = data.length;
-    exploredBiomes = data.filter(biome => biome.EXP === '〇').length;
+    exploredBiomes = data.filter(biome => biome.exp === '〇').length;
   } else {
     totalBiomes = allBiomes.length; // すべてのバイオームを使用
-    exploredBiomes = allBiomes.filter(biome => biome.EXP === '〇').length;
+    exploredBiomes = allBiomes.filter(biome => biome.exp === '〇').length;
   }
   updateProgressDisplay();
 }
 
 function updateProgress() {
   allBiomes.forEach(biome => {
-    const checkbox = document.getElementById(`biome-${biome.No}`);
+    const checkbox = document.getElementById(`biome-${biome.no}`);
     if (checkbox) {
-      biome.EXP = checkbox.checked ? '〇' : '×';
+      biome.exp = checkbox.checked ? '〇' : '×';
     }
   });
   // ソート条件: まずチェックされていないものを先頭に、次にNo順
   allBiomes.sort((a, b) => {
-    if (a.EXP === '×' && b.EXP === '〇') return -1;
-    if (a.EXP === '〇' && b.EXP === '×') return 1;
-    return a.No - b.No;
+    if (a.exp === '×' && b.exp === '〇') return -1;
+    if (a.exp === '〇' && b.exp === '×') return 1;
+    return a.no - b.no;
   });
-  displayBiomes(allBiomes.filter(biome => worldFilters[biome.ワールド])); // フィルタリングを考慮
-  exploredBiomes = allBiomes.filter(biome => biome.EXP === '〇').length;
+  displayBiomes(allBiomes.filter(biome => worldFilters[biome.world_type])); // フィルタリングを考慮
+  exploredBiomes = allBiomes.filter(biome => biome.exp === '〇').length;
   updateProgressDisplay();
 }
 
@@ -183,34 +211,38 @@ function updateProgressDisplay() {
 function filterBiomes() {
   const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
   const filteredBiomes = allBiomes.filter(biome => 
-    (biome.英名.toLowerCase().includes(searchValue) || 
-    biome.日本語名.toLowerCase().includes(searchValue)) &&
-    worldFilters[biome.ワールド]
+    (biome.name_en.toLowerCase().includes(searchValue) || 
+    biome.name_jp.toLowerCase().includes(searchValue)) &&
+    worldFilters[biome.world_type]
   );
   displayBiomes(filteredBiomes);
   calculateProgress(filteredBiomes, false); // 検索フィルタ時はfalse
 }
 
-function downloadCSV() {
-  const biomes = allBiomes.map(biome => [
-    biome.No || '', 
-    biome.英名 || '', 
-    biome.日本語名 || '', 
-    biome.ワールド || '', 
-    biome.EXP || ''
-  ]);
-  const csv = ["No,英名,日本語名,ワールド,EXP", ...biomes.map(biome => biome.join(','))].join("\n");
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement("a");
-  if (link.download !== undefined) {
-    const url = URL.createObjectURL(blob);
-    link.setAttribute("href", url);
-    link.setAttribute("download", "biome_list_" + new Date().toISOString().slice(0, 10).replace(/-/g, '') + ".csv");
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+function saveProgress() {
+  const saveData = {
+    biomes: allBiomes.map(biome => ({
+      no: biome.no || '',
+      name_en: biome.name_en || '',
+      name_jp: biome.name_jp || '',
+      world_type: biome.world_type || '',
+      exp: biome.exp || ''
+    })),
+    styleSettings: {
+      backgroundColor: document.body.style.backgroundColor,
+      fontSize: currentFontSize,
+      fontColor: fontColor,
+      taskListBgColor: taskListBgColor
+    }
+  };
+
+  const jsonData = JSON.stringify(saveData, null, 2);
+
+  const blob = new Blob([jsonData], { type: 'application/json' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `biome_tracker_${new Date().toISOString().slice(0, 10).replace(/-/g, '')}.json`;
+  link.click();
 }
 
 function updateFont() {
