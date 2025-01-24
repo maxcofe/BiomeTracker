@@ -69,6 +69,8 @@ function loadDefaultData() {
 function loadProgress(event) {
   const file = event.target.files[0];
   if (file) {
+    currentFileName = file.name;
+    updateFileNameDisplay(); // ここでファイル名を更新
     const reader = new FileReader();
     // 読み込み開始のフィードバック
     document.getElementById('status').textContent = '読み込み中...';
@@ -76,7 +78,7 @@ function loadProgress(event) {
       try {
         const data = JSON.parse(e.target.result);
         // 読み込み成功のフィードバック
-        document.getElementById('status').textContent = '読み込み完了 ✓';
+        document.getElementById('status').textContent = '読み込み完了.✓';
         // 既存の処理
         allBiomes = data.biomes.map(biome => ({
           no: biome.no,
@@ -322,7 +324,17 @@ function updateBackgroundColor(event) {
 
 function updateFontSize(event) {
   currentFontSize = event.target.value;
-  document.body.style.fontSize = `${currentFontSize}px`;
+  const elementsToApply = [
+    document.getElementById('progress'), // 進捗管理レイヤ
+    document.getElementById('biomeList'), // リストレイヤ
+    ...document.querySelectorAll('.boxed-section') // 検索レイヤを含む
+  ];
+
+  elementsToApply.forEach(el => {
+    if (el) {
+      el.style.fontSize = `${currentFontSize}px`;
+    }
+  });
 }
 
 function updateTaskListBackgroundColor(event) {
