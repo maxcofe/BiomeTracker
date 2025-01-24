@@ -1,0 +1,62 @@
+No,英名,日本語名,ワールド,EXP
+1,Plains,平原,Overworld,×
+2,Sunflower Plains,ヒマワリ平原,Overworld,×
+3,Forest,森林,Overworld,×
+4,Flower Forest,花の森,Overworld,×
+5,Birch Forest,シラカバの森,Overworld,×
+6,Old Growth Birch Forest,シラカバの原生林,Overworld,×
+7,Dark Forest,暗い森,Overworld,×
+8,Pale Garden,ペールガーデン,Overworld,×
+9,Taiga,タイガ,Overworld,×
+10,Snowy Taiga,雪のタイガ,Overworld,×
+11,Old Growth Pine Taiga,マツの原生林,Overworld,×
+12,Old Growth Spruce Taiga,トウヒの原生林,Overworld,×
+13,Meadow,草地,Overworld,×
+14,Cherry Grove,サクラの林,Overworld,×
+15,Grove,林,Overworld,×
+16,Snowy Slopes,雪の斜面,Overworld,×
+17,Jagged Peaks,尖った山頂,Overworld,×
+18,Frozen Peaks,凍った山頂,Overworld,×
+19,Stony Peaks,石だらけの山頂,Overworld,×
+20,Windswept Hills,吹きさらしの丘,Overworld,×
+21,Windswept Gravelly Hills,吹きさらしの砂利の丘,Overworld,×
+22,Windswept Forest,吹きさらしの森,Overworld,×
+23,Desert,砂漠,Overworld,×
+24,Savanna,サバンナ,Overworld,×
+25,Windswept Savanna,吹きさらしのサバンナ,Overworld,×
+26,Savanna Plateau,サバンナの高原,Overworld,×
+27,Badlands,荒野,Overworld,×
+28,Eroded Badlands,侵食された荒野,Overworld,×
+29,Wooded Badlands,森のある荒野,Overworld,×
+30,Swamp,沼地,Overworld,×
+31,Mangrove Swamp,マングローブの沼地,Overworld,×
+32,Jungle,ジャングル,Overworld,×
+33,Sparse Jungle,まばらなジャングル,Overworld,×
+34,Bamboo Jungle,竹林,Overworld,×
+35,Mushroom Fields,キノコ島,Overworld,×
+36,River,河川,Overworld,×
+37,Beach,砂浜,Overworld,×
+38,Stony Shore,石だらけの海岸,Overworld,×
+39,Cold Ocean,冷たい海,Overworld,×
+40,Deep Cold Ocean,冷たい深海,Overworld,×
+41,Frozen Ocean,凍った海,Overworld,×
+42,Deep Frozen Ocean,凍った深海,Overworld,×
+43,Ocean,海洋,Overworld,×
+44,Deep Ocean,深海,Overworld,×
+45,Lukewarm Ocean,ぬるい海,Overworld,×
+46,Deep Lukewarm Ocean,ぬるい深海,Overworld,×
+47,Warm Ocean,暖かい海,Overworld,×
+48,Lush Caves,繁茂した洞窟,Overworld,×
+49,Dripstone Caves,鍾乳洞,Overworld,×
+50,Deep Dark,ディープダーク,Overworld,×
+51,Nether Wastes,ネザーの荒地,Nether,×
+52,Soul Sand Valley,ソウルサンドの谷,Nether,×
+53,Crimson Forest,真紅の森,Nether,×
+54,Warped Forest,歪んだ森,Nether,×
+55,Basalt Deltas,玄武岩の三角州,Nether,×
+56,The End,ジ・エンド,End,×
+57,Small End Islands,小さなエンド島,End,×
+58,End Midlands,エンドの内陸部,End,×
+59,End Highlands,エンドの高地,End,×
+60,End Barrens,エンドのやせ地,End,×
+61,The Void,奈落,Other,×

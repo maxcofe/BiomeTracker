@@ -8,6 +8,19 @@ let isTopBarVisible = true;
 let taskListBgColor = '#FFFFFF';
 let fontColor = '#000000';
 
+function loadDefaultCSV() {
+  fetch('data/biome_list.csv')
+    .then(response => response.text())
+    .then(csv => {
+      allBiomes = processCSV(csv);
+      displayBiomes(allBiomes);
+      calculateProgress(allBiomes);
+    })
+    .catch(error => {
+      console.error('Error loading default CSV:', error);
+    });
+}
+
 function initialize() {
   const fileInput = document.getElementById('csvFile');
   const searchInput = document.getElementById('biomeSearch');
@@ -38,6 +51,7 @@ function initialize() {
     input.checked = true;
     input.addEventListener('change', updateWorldFilter);
   });
+  loadDefaultCSV();
 }
 
 function handleFileSelect(event) {
@@ -48,8 +62,7 @@ function handleFileSelect(event) {
   }
   const reader = new FileReader();
   reader.onload = function (event) {
-    const data = processCSV(event.target.result);
-    allBiomes = data;
+    allBiomes = processCSV(event.target.result);
     displayBiomes(allBiomes);
     calculateProgress(allBiomes);
   };
