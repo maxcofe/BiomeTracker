@@ -292,8 +292,19 @@ function updateCustomFont() {
 }
 
 function applyFont(font) {
-  document.getElementById('progress').style.fontFamily = font;
-  document.getElementById('biomeList').style.fontFamily = font;
+  const elements = [
+    document.getElementById('progress'),
+    document.getElementById('biomeList'),
+    ...document.querySelectorAll('#biomeList li .biomeName'), // バイオーム名のテキスト
+    ...document.querySelectorAll('#biomeList li .world'), // ワールドのテキスト
+    ...document.querySelectorAll('.worldFilter label') // ワールドフィルタのラベル
+  ];
+
+  elements.forEach(el => {
+    if (el) {
+      el.style.fontFamily = font;
+    }
+  });
 }
 
 function updateBackgroundColor(event) {
@@ -316,8 +327,19 @@ function updateTaskListBackgroundColor(event) {
 
 function updateFontColor(event) {
   fontColor = event.target.value;
-  document.getElementById('biomeList').style.color = fontColor;
-  document.getElementById('progress').style.color = fontColor;
+  const elements = [
+    document.getElementById('biomeList'),
+    document.getElementById('progress'),
+    ...document.querySelectorAll('#biomeList li .biomeName'), // バイオーム名のテキスト
+    ...document.querySelectorAll('#biomeList li .world'), // ワールドのテキスト
+    ...document.querySelectorAll('.worldFilter label') // ワールドフィルタのラベル
+  ];
+
+  elements.forEach(el => {
+    if (el) {
+      el.style.color = fontColor;
+    }
+  });
 }
 
 window.onload = initialize;
