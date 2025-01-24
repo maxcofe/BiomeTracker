@@ -10,7 +10,7 @@ let taskListBgColor = '#FFFFFF';
 let fontColor = '#000000';
 
 function loadDefaultData() {
-  fetch('src/scripts/data/biome_tracker_default.json') // ファイル名は適宜変更
+  fetch('data/biome_tracker_default.json') // ファイル名は適宜変更
     .then(response => response.json())
     .then(data => {
       allBiomes = data.biomes.map(biome => ({
@@ -22,7 +22,7 @@ function loadDefaultData() {
       }));
 
       // スタイルの適用
-      const { backgroundColor, fontSize, fontColor, taskListBgColor, font, customFont } = data.styleSettings;
+      const { backgroundColor, fontSize, fontColor, taskListBgColor } = data.styleSettings;
       document.body.style.backgroundColor = backgroundColor;
       document.body.style.fontSize = `${fontSize}px`;
       document.getElementById('biomeList').style.color = fontColor;
@@ -36,18 +36,6 @@ function loadDefaultData() {
       document.getElementById('fontSizeInput').value = fontSize;
       document.getElementById('fontColorPicker').value = fontColor;
       document.getElementById('taskListColorPicker').value = taskListBgColor;
-
-      document.getElementById('fontSelector').value = font; // 選択されたフォントを設定
-      document.getElementById('customFont').value = customFont; // カスタムフォントを設定
-
-      // カスタムフォントが設定されている場合、デフォルトのフォントセレクトを無効化
-      if (customFont && customFont.trim() !== '') {
-        document.getElementById('fontSelector').disabled = true;
-        applyFont(`"${customFont}", Arial, sans-serif`);
-      } else {
-        document.getElementById('fontSelector').disabled = false;
-        applyFont(font);
-      }
 
       displayBiomes(allBiomes);
       calculateProgress(allBiomes);
@@ -116,7 +104,7 @@ function loadProgress(event) {
         }));
 
         // スタイルの適用
-        const { backgroundColor, fontSize, fontColor, taskListBgColor } = data.styleSettings;
+        const { backgroundColor, fontSize, fontColor, taskListBgColor, font, customFont } = data.styleSettings;
         document.body.style.backgroundColor = backgroundColor;
         document.body.style.fontSize = `${fontSize}px`;
         document.getElementById('biomeList').style.color = fontColor;
@@ -130,6 +118,19 @@ function loadProgress(event) {
         document.getElementById('fontSizeInput').value = fontSize;
         document.getElementById('fontColorPicker').value = fontColor;
         document.getElementById('taskListColorPicker').value = taskListBgColor;
+
+        // フォントの設定
+        document.getElementById('fontSelector').value = font; // 選択されたフォントを設定
+        document.getElementById('customFont').value = customFont; // カスタムフォントを設定
+
+        // カスタムフォントが設定されている場合、デフォルトのフォントセレクトを無効化
+        if (customFont && customFont.trim() !== '') {
+          document.getElementById('fontSelector').disabled = true;
+          applyFont(`"${customFont}", Arial, sans-serif`);
+        } else {
+          document.getElementById('fontSelector').disabled = false;
+          applyFont(font);
+        }
 
         displayBiomes(allBiomes);
         calculateProgress(allBiomes);
