@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #00FF00;
+    color: #000; /* 黒色のテキスト */
 }
 .top-bar {
     position: fixed;
@@ -60,6 +61,8 @@ body {
 .progress {
     margin-top: 10px;
     font-weight: bold;
+    position: relative; /* 子要素の絶対位置指定を可能に */
+    overflow: visible; /* オーバーフローを許可 */
 }
 #biomeList::-webkit-scrollbar {
     width: 10px;
@@ -116,6 +119,9 @@ body {
     width: 80vw; 
     margin-left: auto;
     margin-right: auto;
+    display: flex; /* flexboxを使用 */
+    justify-content: space-between; /* 子要素を左右に配置 */
+    align-items: center; /* 中央揃え */
 }
 .boxed-section {
     border: 1px solid #ddd;
@@ -130,27 +136,26 @@ body {
 }
 .color-and-size {
     display: flex;
-    flex-wrap: wrap; /* 要素が自動的に改行する */
+    flex-wrap: wrap;
     align-items: center;
-    gap: 10px; /* 要素間の間隔 */
+    gap: 10px;
 }
 .color-and-size select {
-  width: 130px;
+    width: 130px;
 }
 .color-and-size input[type="number"] {
-  width: 50px;
+    width: 50px;
 }
 .color-and-size input[type="color"] {
-  width: 70px;
+    width: 70px;
 }
 .color-and-size input[type="text"] {
     width: 180px;
 }
-
 .color-and-size span {
     white-space: nowrap;
 }
-.serch-section {
+.search-section {
     width: 80vw; 
     margin-left: auto;
     margin-right: auto;
@@ -160,4 +165,31 @@ body {
     font-size: 12px;
     color: #555;
     margin-top: 5px;
-  }
+}
+.progress-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.progress-container #progress {
+    flex-grow: 1;
+    margin-right: 10px; /* ボタンとの間隔 */
+}
+.save-progress-btn {
+    background: none; /* ボタンの背景を透明に */
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex; /* SVGアイコンを中央に配置 */
+    align-items: center;
+    justify-content: center;
+}
+.save-icon {
+    width: 20px;
+    height: 20px;
+    fill: #4CAF50; /* アイコンの色 */
+}
+.save-progress-btn:hover .save-icon {
+    fill: #45a049; /* ホバー時の色 */
+}

@@ -257,9 +257,13 @@ function updateProgress() {
 }
 
 function updateProgressDisplay() {
-  const progressElement = document.getElementById('progress');
+  const progressText = document.getElementById('progressText');
   const progressPercentage = totalBiomes > 0 ? ((exploredBiomes / totalBiomes) * 100).toFixed(2) : "0.00";
-  progressElement.textContent = `進捗状況: ${exploredBiomes} / ${totalBiomes} ( ${progressPercentage}% )`;
+  
+  // 内部の span 要素の textContent を更新
+  if (progressText) {
+    progressText.textContent = `進捗状況: ${exploredBiomes} / ${totalBiomes} ( ${progressPercentage}% )`;
+  }
 }
 
 function filterBiomes() {
