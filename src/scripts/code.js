@@ -51,6 +51,10 @@ function initialize() {
     input.checked = true;
     input.addEventListener('change', updateWorldFilter);
   });
+
+  // トグルの初期化
+  toggleTopBar();
+  // 初期CSVの読み込み
   loadDefaultCSV();
 }
 
