@@ -22,7 +22,7 @@ function loadDefaultData() {
       }));
 
       // スタイルの適用
-      const { backgroundColor, fontSize, fontColor, taskListBgColor } = data.styleSettings;
+      const { backgroundColor, fontSize, fontColor, taskListBgColor, font, customFont } = data.styleSettings;
       document.body.style.backgroundColor = backgroundColor;
       document.body.style.fontSize = `${fontSize}px`;
       document.getElementById('biomeList').style.color = fontColor;
