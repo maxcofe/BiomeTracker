@@ -430,8 +430,10 @@
   ],
   "styleSettings": {
     "backgroundColor": "#00FF00",
+    "taskListBgColor": "#FFFFFF",
+    "font":"",
+    "customFont":"",
     "fontSize": 14,
     "fontColor": "#000000",
-    "taskListBgColor": "#FFFFFF"
   }
 }

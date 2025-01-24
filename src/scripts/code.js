@@ -31,6 +31,24 @@ function loadDefaultData() {
         el.style.backgroundColor = taskListBgColor;
       });
 
+      // スタイル設定フォームに値をセット
+      document.getElementById('colorPicker').value = backgroundColor;
+      document.getElementById('fontSizeInput').value = fontSize;
+      document.getElementById('fontColorPicker').value = fontColor;
+      document.getElementById('taskListColorPicker').value = taskListBgColor;
+
+      document.getElementById('fontSelector').value = font; // 選択されたフォントを設定
+      document.getElementById('customFont').value = customFont; // カスタムフォントを設定
+
+      // カスタムフォントが設定されている場合、デフォルトのフォントセレクトを無効化
+      if (customFont && customFont.trim() !== '') {
+        document.getElementById('fontSelector').disabled = true;
+        applyFont(`"${customFont}", Arial, sans-serif`);
+      } else {
+        document.getElementById('fontSelector').disabled = false;
+        applyFont(font);
+      }
+
       displayBiomes(allBiomes);
       calculateProgress(allBiomes);
     })
@@ -106,6 +124,12 @@ function loadProgress(event) {
         document.querySelectorAll('.boxed-section').forEach(el => {
           el.style.backgroundColor = taskListBgColor;
         });
+
+        // スタイル設定フォームに値をセット
+        document.getElementById('colorPicker').value = backgroundColor;
+        document.getElementById('fontSizeInput').value = fontSize;
+        document.getElementById('fontColorPicker').value = fontColor;
+        document.getElementById('taskListColorPicker').value = taskListBgColor;
 
         displayBiomes(allBiomes);
         calculateProgress(allBiomes);
@@ -232,7 +256,9 @@ function saveProgress() {
       backgroundColor: document.body.style.backgroundColor,
       fontSize: currentFontSize,
       fontColor: fontColor,
-      taskListBgColor: taskListBgColor
+      taskListBgColor: taskListBgColor,
+      font: document.getElementById('fontSelector').value, // 選択されたフォント
+      customFont: document.getElementById('customFont').value // カスタムフォント
     }
   };
 
@@ -252,7 +278,16 @@ function updateFont() {
 
 function updateCustomFont() {
   const customFont = document.getElementById('customFont').value;
-  applyFont(`"${customFont}", Arial, sans-serif`);
+  const fontSelector = document.getElementById('fontSelector');
+  
+  // カスタムフォントが入力されているかチェック
+  if (customFont.trim() !== '') {
+    fontSelector.disabled = true; // プルダウンを非活性化
+    applyFont(`"${customFont}", Arial, sans-serif`);
+  } else {
+    fontSelector.disabled = false; // プルダウンを再度活性化
+    updateFont(); // デフォルトのフォントを再適用
+  }
 }
 
 function applyFont(font) {
