@@ -10,7 +10,7 @@ let taskListBgColor = '#FFFFFF';
 let fontColor = '#000000';
 
 function loadDefaultData() {
-  fetch('data/biome_tracker_default.json') // ファイル名は適宜変更
+  fetch('src/scripts/data/biome_tracker_default.json') // ファイル名は適宜変更
     .then(response => response.json())
     .then(data => {
       allBiomes = data.biomes.map(biome => ({
