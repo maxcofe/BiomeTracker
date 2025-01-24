@@ -245,6 +245,13 @@ function filterBiomes() {
   calculateProgress(filteredBiomes, false); // 検索フィルタ時はfalse
 }
 
+function rgbToHex(rgb) {
+  const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  if (!match) return rgb;
+  const [, r, g, b] = match.map(Number);
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 function saveProgress() {
   const saveData = {
     biomes: allBiomes.map(biome => ({
@@ -255,12 +262,12 @@ function saveProgress() {
       exp: biome.exp || ''
     })),
     styleSettings: {
-      backgroundColor: document.body.style.backgroundColor,
+      backgroundColor: rgbToHex(getComputedStyle(document.body).backgroundColor),
       fontSize: currentFontSize,
       fontColor: fontColor,
-      taskListBgColor: taskListBgColor,
-      font: document.getElementById('fontSelector').value, // 選択されたフォント
-      customFont: document.getElementById('customFont').value // カスタムフォント
+      taskListBgColor: rgbToHex(getComputedStyle(document.getElementById('biomeList')).backgroundColor),
+      font: document.getElementById('fontSelector').value,
+      customFont: document.getElementById('customFont').value
     }
   };
 
