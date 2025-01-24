@@ -2,8 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #00FF00;
-  }
-  .top-bar {
+}
+.top-bar {
     position: fixed;
     top: 0;
     background: #f9f9f9;
@@ -16,16 +16,16 @@ body {
     align-items: flex-start;
     width: 100%;
     box-sizing: border-box;
-  }
-  .search-bar {
+}
+.search-bar {
     flex-grow: 1;
-  }
-  .worldFilter {
+}
+.worldFilter {
     display: flex;
     gap: 10px;
     margin-top: 10px;
-  }
-  #biomeList {
+}
+#biomeList {
     margin-top: 20px;
     max-height: calc(100vh - 250px);
     overflow-y: auto;
@@ -39,47 +39,47 @@ body {
     position: sticky;
     top: 0;
     z-index: 2;
-  }
-  #biomeList li {
+}
+#biomeList li {
     list-style: none;
     margin: 5px 0;
     display: flex;
     align-items: center;
-  }
-  #biomeList li input[type="checkbox"] {
+}
+#biomeList li input[type="checkbox"] {
     margin-right: 10px;
-  }
-  #biomeList li .biomeName {
+}
+#biomeList li .biomeName {
     flex-grow: 1;
-  }
-  #biomeList li .world {
+}
+#biomeList li .world {
     margin-left: 20px;
     white-space: nowrap;
-  }
-  .progress {
+}
+.progress {
     margin-top: 10px;
     font-weight: bold;
-  }
-  #biomeList::-webkit-scrollbar {
+}
+#biomeList::-webkit-scrollbar {
     width: 10px;
-  }
-  #biomeList::-webkit-scrollbar-thumb {
+}
+#biomeList::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
-  }
-  #biomeList::-webkit-scrollbar-thumb:hover {
+}
+#biomeList::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
-  #fontSelector {
+}
+#fontSelector {
     margin-left: 10px;
-  }
-  #customFont {
+}
+#customFont {
     margin-left: 10px;
-  }
-  .file-upload-wrapper button, .save-button {
+}
+.file-upload-wrapper button, .save-button {
     background-color: #FF4500;
-  }
-  .file-upload-btn, .save-button {
+}
+.file-upload-btn, .save-button {
     background-color: #FF4500;
     border: none;
     color: white;
@@ -91,19 +91,19 @@ body {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
-  }
-  .toggle-top-bar {
+}
+.toggle-top-bar {
     position: fixed;
     top: 0;
     right: 0;
     z-index: 1001;
     padding: 5px;
-    background-color: #4CAF50;
+    background-color: #6b5e9b;
     color: white;
     border: none;
     cursor: pointer;
-  }
-  #progress {
+}
+#progress {
     position: sticky;
     top: auto; 
     bottom: 10px; 
@@ -115,23 +115,28 @@ body {
     width: 80vw; 
     margin-left: auto;
     margin-right: auto;
-  }
-  .boxed-section {
+}
+.boxed-section {
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
     background: #fff;
     margin-bottom: 10px;
-  }
-  .search-bar-boxed {
+}
+.search-bar-boxed {
     width: 100%;
     box-sizing: border-box;
-  }
-  .color-and-size {
+}
+.color-and-size {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  .color-and-size span {
+}
+.color-and-size span {
     white-space: nowrap;
-  }
+}
+.serch-section {
+    width: 80vw; 
+    margin-left: auto;
+    margin-right: auto;
+}
