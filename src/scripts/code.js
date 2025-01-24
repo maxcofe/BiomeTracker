@@ -232,14 +232,26 @@ function updateProgress() {
       biome.exp = checkbox.checked ? '〇' : '×';
     }
   });
-  // ソート条件: まずチェックされていないものを先頭に、次にNo順
+  
+  // ソート
   allBiomes.sort((a, b) => {
     if (a.exp === '×' && b.exp === '〇') return -1;
     if (a.exp === '〇' && b.exp === '×') return 1;
     return a.no - b.no;
   });
-  displayBiomes(allBiomes.filter(biome => worldFilters[biome.world_type])); // フィルタリングを考慮
-  exploredBiomes = allBiomes.filter(biome => biome.exp === '〇').length;
+
+  // 検索フィルタを保持するために現在の検索条件を取得
+  const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
+  
+  // フィルタリングを再適用
+  const filteredBiomes = allBiomes.filter(biome => 
+    (biome.name_en.toLowerCase().includes(searchValue) || 
+     biome.name_jp.toLowerCase().includes(searchValue)) &&
+    worldFilters[biome.world_type]
+  );
+  
+  displayBiomes(filteredBiomes);
+  calculateProgress(filteredBiomes, false); // 検索フィルタ時はfalse
   updateProgressDisplay();
 }
 
