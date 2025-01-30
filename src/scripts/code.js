@@ -341,7 +341,7 @@ function saveProgress() {
       name_en: biome.name_en || '',
       name_jp: biome.name_jp || '',
       world_type: biome.world_type || '',
-      exp: biome.exp || ''
+      exp: typeof biome.exp === 'boolean' ? biome.exp : false
     })),
     styleSettings: {
       backgroundColor: rgbToHex(getComputedStyle(document.body).backgroundColor),
