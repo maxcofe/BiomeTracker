@@ -5,427 +5,427 @@
       "name_en": "Plains",
       "name_jp": "平原",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "2",
       "name_en": "Sunflower Plains",
       "name_jp": "ヒマワリ平原",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "3",
       "name_en": "Forest",
       "name_jp": "森林",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "4",
       "name_en": "Flower Forest",
       "name_jp": "花の森",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "5",
       "name_en": "Birch Forest",
       "name_jp": "シラカバの森",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "6",
       "name_en": "Old Growth Birch Forest",
       "name_jp": "シラカバの原生林",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "7",
       "name_en": "Dark Forest",
       "name_jp": "暗い森",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "8",
       "name_en": "Pale Garden",
       "name_jp": "ペールガーデン",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "9",
       "name_en": "Taiga",
       "name_jp": "タイガ",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "10",
       "name_en": "Snowy Taiga",
       "name_jp": "雪のタイガ",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "11",
       "name_en": "Old Growth Pine Taiga",
       "name_jp": "マツの原生林",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "12",
       "name_en": "Old Growth Spruce Taiga",
       "name_jp": "トウヒの原生林",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "13",
       "name_en": "Meadow",
       "name_jp": "草地",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "14",
       "name_en": "Cherry Grove",
       "name_jp": "サクラの林",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "15",
       "name_en": "Grove",
       "name_jp": "林",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "16",
       "name_en": "Snowy Slopes",
       "name_jp": "雪の斜面",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "17",
       "name_en": "Jagged Peaks",
       "name_jp": "尖った山頂",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "18",
       "name_en": "Frozen Peaks",
       "name_jp": "凍った山頂",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "19",
       "name_en": "Stony Peaks",
       "name_jp": "石だらけの山頂",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "20",
       "name_en": "Windswept Hills",
       "name_jp": "吹きさらしの丘",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "21",
       "name_en": "Windswept Gravelly Hills",
       "name_jp": "吹きさらしの砂利の丘",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "22",
       "name_en": "Windswept Forest",
       "name_jp": "吹きさらしの森",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "23",
       "name_en": "Desert",
       "name_jp": "砂漠",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "24",
       "name_en": "Savanna",
       "name_jp": "サバンナ",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "25",
       "name_en": "Windswept Savanna",
       "name_jp": "吹きさらしのサバンナ",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "26",
       "name_en": "Savanna Plateau",
       "name_jp": "サバンナの高原",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "27",
       "name_en": "Badlands",
       "name_jp": "荒野",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "28",
       "name_en": "Eroded Badlands",
       "name_jp": "侵食された荒野",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "29",
       "name_en": "Wooded Badlands",
       "name_jp": "森のある荒野",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "30",
       "name_en": "Swamp",
       "name_jp": "沼地",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "31",
       "name_en": "Mangrove Swamp",
       "name_jp": "マングローブの沼地",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "32",
       "name_en": "Jungle",
       "name_jp": "ジャングル",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "33",
       "name_en": "Sparse Jungle",
       "name_jp": "まばらなジャングル",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "34",
       "name_en": "Bamboo Jungle",
       "name_jp": "竹林",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "35",
       "name_en": "Mushroom Fields",
       "name_jp": "キノコ島",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "36",
       "name_en": "River",
       "name_jp": "河川",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "37",
       "name_en": "Beach",
       "name_jp": "砂浜",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "38",
       "name_en": "Stony Shore",
       "name_jp": "石だらけの海岸",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "39",
       "name_en": "Cold Ocean",
       "name_jp": "冷たい海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "40",
       "name_en": "Deep Cold Ocean",
       "name_jp": "冷たい深海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "41",
       "name_en": "Frozen Ocean",
       "name_jp": "凍った海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "42",
       "name_en": "Deep Frozen Ocean",
       "name_jp": "凍った深海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "43",
       "name_en": "Ocean",
       "name_jp": "海洋",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "44",
       "name_en": "Deep Ocean",
       "name_jp": "深海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "45",
       "name_en": "Lukewarm Ocean",
       "name_jp": "ぬるい海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "46",
       "name_en": "Deep Lukewarm Ocean",
       "name_jp": "ぬるい深海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "47",
       "name_en": "Warm Ocean",
       "name_jp": "暖かい海",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "48",
       "name_en": "Lush Caves",
       "name_jp": "繁茂した洞窟",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "49",
       "name_en": "Dripstone Caves",
       "name_jp": "鍾乳洞",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "50",
       "name_en": "Deep Dark",
       "name_jp": "ディープダーク",
       "world_type": "Overworld",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "51",
       "name_en": "Nether Wastes",
       "name_jp": "ネザーの荒地",
       "world_type": "Nether",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "52",
       "name_en": "Soul Sand Valley",
       "name_jp": "ソウルサンドの谷",
       "world_type": "Nether",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "53",
       "name_en": "Crimson Forest",
       "name_jp": "真紅の森",
       "world_type": "Nether",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "54",
       "name_en": "Warped Forest",
       "name_jp": "歪んだ森",
       "world_type": "Nether",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "55",
       "name_en": "Basalt Deltas",
       "name_jp": "玄武岩の三角州",
       "world_type": "Nether",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "56",
       "name_en": "The End",
       "name_jp": "ジ・エンド",
       "world_type": "End",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "57",
       "name_en": "Small End Islands",
       "name_jp": "小さなエンド島",
       "world_type": "End",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "58",
       "name_en": "End Midlands",
       "name_jp": "エンドの内陸部",
       "world_type": "End",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "59",
       "name_en": "End Highlands",
       "name_jp": "エンドの高地",
       "world_type": "End",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "60",
       "name_en": "End Barrens",
       "name_jp": "エンドのやせ地",
       "world_type": "End",
-      "exp": "×"
+      "exp": false
     },
     {
       "no": "61",
       "name_en": "The Void",
       "name_jp": "奈落",
       "world_type": "Other",
-      "exp": "×"
+      "exp": false
     }
   ],
   "styleSettings": {
