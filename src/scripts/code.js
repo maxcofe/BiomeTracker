@@ -171,7 +171,7 @@ function updateWorldFilter(event) {
   applyFilters(); // 共通のフィルタ関数を呼び出す
 }
 
-function applyFilters() {
+function applyFilters(isCalculate = true) {
   const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
   
   const filteredBiomes = allBiomes.filter(biome => 
@@ -181,7 +181,7 @@ function applyFilters() {
   );
   
   displayBiomes(filteredBiomes);
-  calculateProgress(filteredBiomes, true); // true はワールドフィルタの適用を示す
+  calculateProgress(filteredBiomes, isCalculate);
 }
 
 function toggleTopBar() {
@@ -267,7 +267,7 @@ function updateProgressDisplay() {
 }
 
 function filterBiomes() {
-  applyFilters(); // 共通のフィルタ関数を呼び出す
+  applyFilters(false);
 }
 
 function rgbToHex(rgb) {
