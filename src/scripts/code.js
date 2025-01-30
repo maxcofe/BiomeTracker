@@ -261,10 +261,10 @@ function displayBiomes(data) {
     const li = document.createElement('li');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.checked = biome.exp === '〇';
+    checkbox.checked = biome.exp;
     checkbox.id = `biome-${biome.no}`;
     checkbox.addEventListener('change', function() {
-      biome.exp = this.checked ? '〇' : '×';
+      biome.exp = this.checked;
       updateProgress();
     });
     li.appendChild(checkbox);
@@ -286,10 +286,10 @@ function displayBiomes(data) {
 function calculateProgress(data, isWorldFilter = true) {
   if (isWorldFilter) {
     totalBiomes = data.length;
-    exploredBiomes = data.filter(biome => biome.exp === '〇').length;
+    exploredBiomes = data.filter(biome => biome.exp).length;
   } else {
     totalBiomes = allBiomes.length; // すべてのバイオームを使用
-    exploredBiomes = allBiomes.filter(biome => biome.exp === '〇').length;
+    exploredBiomes = allBiomes.filter(biome => biome.exp).length;
   }
   updateProgressDisplay();
 }
@@ -298,14 +298,14 @@ function updateProgress() {
   allBiomes.forEach(biome => {
     const checkbox = document.getElementById(`biome-${biome.no}`);
     if (checkbox) {
-      biome.exp = checkbox.checked ? '〇' : '×';
+      biome.exp = checkbox.checked;
     }
   });
   
   // ソート
   allBiomes.sort((a, b) => {
-    if (a.exp === '×' && b.exp === '〇') return -1;
-    if (a.exp === '〇' && b.exp === '×') return 1;
+    if (!a.exp && b.exp) return -1;
+    if (a.exp && !b.exp) return 1;
     return a.no - b.no;
   });
 
