@@ -224,15 +224,21 @@ function updateWorldFilter(event) {
 
 function applyFilters(isCalculate = true) {
   const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
-  
-  const filteredBiomes = allBiomes.filter(biome => 
-    (biome.name_en.toLowerCase().includes(searchValue) || 
-     biome.name_jp.toLowerCase().includes(searchValue)) &&
+
+  const worldFilterdBiomes = allBiomes.filter(biome =>
     worldFilters[biome.world_type]
   );
+
+  if (isCalculate) {
+    calculateProgress(worldFilterdBiomes, true);
+  }
+
+  const searchFilteredBiomes = worldFilterdBiomes.filter(biome => 
+    (biome.name_en.toLowerCase().includes(searchValue) || 
+     biome.name_jp.toLowerCase().includes(searchValue))
+  );
   
-  displayBiomes(filteredBiomes);
-  calculateProgress(filteredBiomes, isCalculate);
+  displayBiomes(searchFilteredBiomes);
 }
 
 function toggleTopBar() {
