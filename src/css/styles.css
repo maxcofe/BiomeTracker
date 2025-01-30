@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #00FF00;
+    background-color: #FFFFFF;
     color: #000; /* 黒色のテキスト */
 }
 .top-bar {
@@ -75,10 +75,10 @@ body {
     background: #555;
 }
 #fontSelector {
-    margin-left: 10px;
+    margin-left: 0px;
 }
 #customFont {
-    margin-left: 10px;
+    margin-left: 0px;
 }
 .file-upload-wrapper button, .save-button {
     background-color: #FF4500;
@@ -154,6 +154,10 @@ body {
 }
 .color-and-size span {
     white-space: nowrap;
+    display: inline-block; /* インラインブロックに変更 */
+    width: 100px; /* 固定幅を設定 */
+    text-align: right; /* 右寄せ */
+    margin-right: 10px; /* ラベルとカラーピッカーの間のスペース */
 }
 .search-section {
     width: 80vw; 
@@ -192,4 +196,18 @@ body {
 }
 .save-progress-btn:hover .save-icon {
     fill: #45a049; /* ホバー時の色 */
+}
+.use-green-background-btn {
+    background-color: #FF4500;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }

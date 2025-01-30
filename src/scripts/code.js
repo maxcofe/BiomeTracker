@@ -2,7 +2,7 @@
 let totalBiomes = 0;
 let exploredBiomes = 0;
 let allBiomes = [];
-let worldFilters = { Overworld: true, Nether: true, End: true, Other: true };
+let worldFilters = {};
 let currentFileName = '';
 let currentFontSize = 14;
 let isTopBarVisible = true;
@@ -70,16 +70,15 @@ function loadProgress(event) {
   const file = event.target.files[0];
   if (file) {
     currentFileName = file.name;
-    updateFileNameDisplay(); // ここでファイル名を更新
+    updateFileNameDisplay();
     const reader = new FileReader();
-    // 読み込み開始のフィードバック
     document.getElementById('status').textContent = '読み込み中...';
     reader.onload = function(e) {
       try {
         const data = JSON.parse(e.target.result);
-        // 読み込み成功のフィードバック
         document.getElementById('status').textContent = '読み込み完了.✓';
-        // 既存の処理
+
+        // バイオームデータの更新
         allBiomes = data.biomes.map(biome => ({
           no: biome.no,
           name_en: biome.name_en,
@@ -88,20 +87,45 @@ function loadProgress(event) {
           exp: biome.exp
         }));
 
-        applyStylesAndUpdateForm(data);
+        // ワールドの種類を抽出してworldFiltersを更新
+        const uniqueWorldTypes = [...new Set(allBiomes.map(biome => biome.world_type))];
+        worldFilters = {};
+        uniqueWorldTypes.forEach(worldType => {
+          worldFilters[worldType] = true; // 初期状態として全てtrueに設定
+        });
+
+        // UI上のチェックボックス状態を更新
+        Object.keys(worldFilters).forEach(world => {
+          let checkbox = document.querySelector(`.worldFilter input[value="${world}"]`);
+          if (!checkbox) {
+            // 既存のチェックボックスがない場合、新しいチェックボックスを追加
+            const label = document.createElement('label');
+            checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = world;
+            checkbox.checked = true;
+            checkbox.addEventListener('change', updateWorldFilter);
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(world));
+            document.querySelector('.worldFilter').appendChild(label);
+          } else {
+            checkbox.checked = true;
+          }
+        });
 
         displayBiomes(allBiomes);
         calculateProgress(allBiomes);
 
-        // フィードバックを一定時間後に消去（オプション）
+        // スタイル設定の適用
+        applyStylesAndUpdateForm(data);
+
         setTimeout(() => {
           document.getElementById('status').textContent = '';
-        }, 3000); // 3秒後にメッセージを消去
+        }, 3000);
       } catch(error) {
         console.error('Error parsing JSON:', error);
         document.getElementById('status').textContent = '読み込みエラー';
         alert('Failed to load the data. Please check the file format.');
-        // 一定時間後にエラーメッセージを消去（オプション）
         setTimeout(() => {
           document.getElementById('status').textContent = '';
         }, 3000);
@@ -171,7 +195,7 @@ function updateWorldFilter(event) {
   applyFilters(); // 共通のフィルタ関数を呼び出す
 }
 
-function applyFilters() {
+function applyFilters(isCalculate = true) {
   const searchValue = document.getElementById('biomeSearch').value.toLowerCase();
   
   const filteredBiomes = allBiomes.filter(biome => 
@@ -181,7 +205,7 @@ function applyFilters() {
   );
   
   displayBiomes(filteredBiomes);
-  calculateProgress(filteredBiomes, true); // true はワールドフィルタの適用を示す
+  calculateProgress(filteredBiomes, isCalculate);
 }
 
 function toggleTopBar() {
@@ -267,7 +291,7 @@ function updateProgressDisplay() {
 }
 
 function filterBiomes() {
-  applyFilters(); // 共通のフィルタ関数を呼び出す
+  applyFilters(false);
 }
 
 function rgbToHex(rgb) {
@@ -332,6 +356,11 @@ function updateBackgroundColor(event) {
   document.body.style.backgroundColor = color;
 }
 
+function setGreenBackground() {
+  document.body.style.backgroundColor = '#00FF00';
+  document.getElementById('colorPicker').value = '#00FF00';
+}
+
 function updateFontSize(event) {
   currentFontSize = event.target.value;
   const elementsToApply = [
@@ -353,6 +382,17 @@ function updateTaskListBackgroundColor(event) {
   document.querySelectorAll('.boxed-section').forEach(el => {
     el.style.backgroundColor = taskListBgColor;
   });
+}
+
+function setListGreenBackground() {
+  // リスト背景色を#00FF00に設定
+  document.getElementById('biomeList').style.backgroundColor = '#00FF00';
+  document.querySelectorAll('.boxed-section').forEach(el => {
+    el.style.backgroundColor = '#00FF00';
+  });
+  
+  // カラーピッカーの値も更新
+  document.getElementById('taskListColorPicker').value = '#00FF00';
 }
 
 function updateFontColor(event) {

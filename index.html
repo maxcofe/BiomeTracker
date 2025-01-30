@@ -37,20 +37,18 @@
     </div>
     <div class="color-and-size">
       <span>背景色：</span>
-      <input type="color" id="colorPicker" class="color-picker" value="#00FF00">
+      <input type="color" id="colorPicker" class="color-picker" value="#FFFFFF">
+      <button class="use-green-background-btn" onclick="setGreenBackground()">グリーンバックを使用</button>
     </div>
     <div class="color-and-size">
       <span>リスト背景色：</span>
       <input type="color" id="taskListColorPicker" class="color-picker" value="#FFFFFF">
+      <button class="use-green-background-btn" onclick="setListGreenBackground()">グリーンバックを使用</button>
     </div>
   </div>
   <div class="boxed-section search-section">
     <input type="text" id="biomeSearch" class="search-bar search-bar-boxed" placeholder="バイオーム名を検索">
     <div class="worldFilter">
-      <label><input type="checkbox" value="Overworld" checked>Overworld</label>
-      <label><input type="checkbox" value="Nether" checked>Nether</label>
-      <label><input type="checkbox" value="End" checked>End</label>
-      <label><input type="checkbox" value="Other" checked>Other</label>
     </div>
   </div>
   <div id="progress" class="progress boxed-section">
