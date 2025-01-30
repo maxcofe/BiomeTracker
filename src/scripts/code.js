@@ -53,10 +53,37 @@ function loadDefaultData() {
         exp: biome.exp
       }));
 
-      applyStylesAndUpdateForm(data);
+      // ワールドの種類を抽出してworldFiltersを更新
+      const uniqueWorldTypes = [...new Set(allBiomes.map(biome => biome.world_type))];
+      worldFilters = {};
+      uniqueWorldTypes.forEach(worldType => {
+        worldFilters[worldType] = true; // 初期状態として全てtrueに設定
+      });
+
+      // UI上のチェックボックス状態を更新
+      Object.keys(worldFilters).forEach(world => {
+        let checkbox = document.querySelector(`.worldFilter input[value="${world}"]`);
+        if (!checkbox) {
+          // 既存のチェックボックスがない場合、新しいチェックボックスを追加
+          const label = document.createElement('label');
+          checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.value = world;
+          checkbox.checked = true;
+          checkbox.addEventListener('change', updateWorldFilter);
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(world));
+          document.querySelector('.worldFilter').appendChild(label);
+        } else {
+          checkbox.checked = true;
+        }
+      });
 
       displayBiomes(allBiomes);
       calculateProgress(allBiomes);
+
+      // スタイル設定の適用
+      applyStylesAndUpdateForm(data);
     })
     .catch(error => {
       console.error('Error loading default JSON:', error);
